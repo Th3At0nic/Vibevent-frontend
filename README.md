@@ -20,7 +20,45 @@ This is a **fully structured, scalable, and production-ready** React + TypeScrip
 
 ## 🏗 Project Structure
 
-/src /components /Layout - MainLayout.tsx - Navbar.tsx - Sidebar.tsx - Footer.tsx /Pages - Dashboard.tsx - Login.tsx - AdminDashboard.tsx - UserDashboard.tsx /redux - authSlice.ts - userSlice.ts /routes - ProtectedRoute.tsx /utils - authUtils.ts (for token management) /assets - images - styles App.tsx index.tsx
+📦 react-ts-dashboard-boilerplate
+├── 📂 src
+│ ├── 📂 components
+│ │ ├── 📂 Layout
+│ │ │ ├── MainLayout.tsx
+│ │ │ ├── Navbar.tsx
+│ │ │ ├── Sidebar.tsx
+│ │ │ ├── Footer.tsx
+│ │ ├── 📂 Form (Custom Form Components)
+│ │ ├── 📂 UI (Reusable UI components)
+│ │ │  
+│ ├── 📂 pages
+│ │ ├── Dashboard.tsx
+│ │ ├── Login.tsx
+│ │ ├── AdminDashboard.tsx
+│ │ ├── UserDashboard.tsx
+│ ├── 📂 redux
+│ │ ├── store.ts
+│ │ ├── hooks.ts
+│ │ ├── 📂 features
+│ │ │ ├── authSlice.ts
+│ │ │ ├── userSlice.ts
+│ ├── 📂 routes
+│ │ ├── ProtectedRoute.tsx
+│ ├── 📂 utils
+│ │ ├── authUtils.ts (Token management)
+│ │ ├── api.ts (API helper functions)
+│ ├── 📂 assets
+│ │ ├── 📂 images
+│ │ ├── 📂 styles
+│ │ │ ├── global.css
+│ │ │ ├── tailwind.css
+│ ├── App.tsx
+│ ├── index.tsx
+├── 📜 .gitignore
+├── 📜 package.json
+├── 📜 README.md
+├── 📜 tsconfig.json
+└── 📜 vite.config.ts
 
 ---
 
