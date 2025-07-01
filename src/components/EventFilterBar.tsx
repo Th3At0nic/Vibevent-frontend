@@ -21,7 +21,7 @@ const EventFilterBar = ({ onFilterChange }: TProps) => {
   const [rawTitle, setRawTitle] = useState<string>(""); //  for typing
 
   const [filters, setFilters] = useState<TEventFilters>({
-    date: dayjs().format("YYYY-MM-DD"), // default to today
+    // date: dayjs().format("YYYY-MM-DD"), // default to today
   });
 
   const debouncedTitle = useDebounce(rawTitle, 500); //  600ms delay
@@ -70,7 +70,6 @@ const EventFilterBar = ({ onFilterChange }: TProps) => {
           showNow
           size="large"
           className="w-full lg:w-1/4"
-          defaultValue={dayjs()}
           disabledDate={disabledDate}
           onChange={(date) => {
             const value = date ? date.format("YYYY-MM-DD") : undefined;

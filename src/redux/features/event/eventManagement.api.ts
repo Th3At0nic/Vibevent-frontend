@@ -58,27 +58,43 @@ const eventManagementApi = baseApi.injectEndpoints({
     // }),
     getAllEvents: builder.query({
       query: (filters) => {
-        const params = new URLSearchParams();
+        // Build query object conditionally
+        const queryObject = {
+          ...(filters.title ? { searchTerm: filters.title } : {}),
+          ...(filters.date ? { eventDate: filters.date } : {}),
+          ...(filters.range ? { dateFilter: filters.range } : {}),
+        };
 
-        if (filters?.title) params.append("searchTerm", filters.title);
-        if (filters?.date) params.append("eventDate", filters.date);
-        if (filters?.range) params.append("dateFilter", filters.range);
+        // Convert to URL query string
+        const params = new URLSearchParams(queryObject).toString();
 
         return {
-          url: `/events?${params.toString()}`,
+          url: `/events?${params}`,
           method: "GET",
         };
       },
       providesTags: ["allEvents"],
     }),
-
     getMyEvents: builder.query({
-      query: () => ({
-        url: `/events/my-events`,
-        method: "GET",
-      }),
+      query: (filters) => {
+        // Build query object conditionally
+        const queryObject = {
+          ...(filters.title ? { searchTerm: filters.title } : {}),
+          ...(filters.date ? { eventDate: filters.date } : {}),
+          ...(filters.range ? { dateFilter: filters.range } : {}),
+        };
+
+        // Convert to URL query string
+        const params = new URLSearchParams(queryObject).toString();
+
+        return {
+          url: `/events/my-events?${params}`,
+          method: "GET",
+        };
+      },
       providesTags: ["myEvents"],
     }),
+
     joinEvent: builder.mutation({
       query: (eventId: string) => ({
         url: `/events/${eventId}/join`,

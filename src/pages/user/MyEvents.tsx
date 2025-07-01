@@ -26,14 +26,13 @@ const MyEvents = () => {
   };
 
   const { data: myEventsData, isLoading } = useGetMyEventsQuery(queryParams);
+  const events = myEventsData?.data as TEvent[];
 
   const [selectedEvent, setSelectedEvent] = useState<TEvent | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // const [updateEvent] = useUpdateEventMutation();
   const [deleteEvent] = useDeleteEventMutation();
-
-  const events = myEventsData?.data as TEvent[];
 
   const handleUpdate = (eventId: string) => {
     console.log("Update event:", eventId);
