@@ -57,12 +57,21 @@ const eventManagementApi = baseApi.injectEndpoints({
     //   invalidatesTags: ["students"],
     // }),
     getAllEvents: builder.query({
-      query: () => ({
-        url: `/events`,
-        method: "GET",
-      }),
+      query: (filters) => {
+        const params = new URLSearchParams();
+
+        if (filters?.title) params.append("searchTerm", filters.title);
+        if (filters?.date) params.append("eventDate", filters.date);
+        if (filters?.range) params.append("dateFilter", filters.range);
+
+        return {
+          url: `/events?${params.toString()}`,
+          method: "GET",
+        };
+      },
       providesTags: ["allEvents"],
     }),
+
     getMyEvents: builder.query({
       query: () => ({
         url: `/events/my-events`,

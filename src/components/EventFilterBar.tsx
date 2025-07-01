@@ -2,6 +2,7 @@ import { Input, DatePicker, Select, Button, Tooltip } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import moment from "moment";
+import { useDebounce } from "../hooks/useDebounce";
 
 const { Option } = Select;
 
@@ -16,15 +17,31 @@ type TProps = {
 };
 
 const EventFilterBar = ({ onFilterChange }: TProps) => {
+  const [rawTitle, setRawTitle] = useState<string>(""); //  for typing
+
   const [filters, setFilters] = useState<TEventFilters>({
     date: moment().format("YYYY-MM-DD"), // default to today
   });
+
+  const debouncedTitle = useDebounce(rawTitle, 500); //  600ms delay
+
+  //  Update filters only when debounced title changes
+  useEffect(() => {
+    if (debouncedTitle !== "") {
+      setFilters({
+        title: debouncedTitle,
+        date: undefined,
+        range: undefined,
+      });
+    }
+  }, [debouncedTitle]);
 
   useEffect(() => {
     onFilterChange(filters); // pass filter state up
   }, [filters, onFilterChange]);
 
   const handleClear = () => {
+    setRawTitle("");
     setFilters({});
   };
 
@@ -37,9 +54,8 @@ const EventFilterBar = ({ onFilterChange }: TProps) => {
           size="large"
           className="lg:w-1/4"
           allowClear
-          onChange={(e) =>
-            setFilters((prev) => ({ ...prev, title: e.target.value }))
-          }
+          onChange={(e) => setRawTitle(e.target.value)}
+          value={rawTitle}
         />
 
         {/* Date Picker (Today filter) */}
@@ -49,7 +65,12 @@ const EventFilterBar = ({ onFilterChange }: TProps) => {
           defaultValue={moment()}
           onChange={(date) => {
             const value = date ? moment(date).format("YYYY-MM-DD") : undefined;
-            setFilters((prev) => ({ ...prev, date: value }));
+            setFilters({
+              title: undefined,
+              date: value,
+              range: undefined,
+            });
+            setRawTitle(""); // reset raw title if date used
           }}
         />
 
@@ -60,7 +81,12 @@ const EventFilterBar = ({ onFilterChange }: TProps) => {
           allowClear
           className="w-full lg:w-1/4"
           onChange={(value) => {
-            setFilters((prev) => ({ ...prev, range: value }));
+            setFilters({
+              title: undefined,
+              date: undefined,
+              range: value,
+            });
+            setRawTitle(""); // reset raw title if range used
           }}
         >
           <Option value="currentWeek">Current Week</Option>

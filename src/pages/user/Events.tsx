@@ -8,6 +8,10 @@ import EventFilterBar, { TEventFilters } from "../../components/EventFilterBar";
 const Events = () => {
   const [filters, setFilters] = useState<TEventFilters>({});
 
+  const handleFilterChange = (updatedFilters: TEventFilters) => {
+    setFilters(updatedFilters);
+  };
+
   const queryParams = {
     title: filters.title,
     date: filters.date,
@@ -15,6 +19,7 @@ const Events = () => {
   };
 
   const { data: eventsData, isLoading } = useGetAllEventsQuery(queryParams);
+
 
   const events = eventsData?.data as TEvent[]; // safe cast
 
@@ -25,7 +30,7 @@ const Events = () => {
       </h1>
 
       <div className="lg:mx-70 lg:my-10">
-        <EventFilterBar onFilterChange={setFilters} />
+        <EventFilterBar onFilterChange={handleFilterChange} />
       </div>
 
       {isLoading ? (
