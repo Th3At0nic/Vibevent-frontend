@@ -23,7 +23,7 @@ export const userPaths = [
   },
   {
     name: "Add Event",
-    path: "add-events",
+    path: "add-event",
     element: (
       <ProtectedRoute role="user">
         <AddEvent />
