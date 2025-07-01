@@ -120,8 +120,6 @@ VibeEvent is a modern, full-featured Event Management Web Application frontend b
 
 ---
 
-## ✅ Project Status
-
 ## 🚀 Project Status & Future Plans
 
 ✅ Core features are implemented and functional, including custom authentication, event creation, joining, updating, and deletion.
