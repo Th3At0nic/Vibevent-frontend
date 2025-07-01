@@ -1,5 +1,5 @@
 // components/EventCard.tsx
-import { Button, Card } from "antd";
+import { Button, Card, Tooltip } from "antd";
 import {
   CalendarOutlined,
   EnvironmentOutlined,
@@ -14,12 +14,17 @@ import {
 } from "../types/event.type";
 import { useJoinEventMutation } from "../redux/features/event/eventManagement.api";
 import { toast } from "sonner";
+import { useAppSelector } from "../redux/hooks";
+import { currentUser } from "../redux/features/auth/authSlice";
 
 type Props = {
   event: TEvent;
 };
 
 const EventCard = ({ event }: Props) => {
+  const user = useAppSelector(currentUser);
+
+  const userEmail = user?.userEmail;
 
   const [joinEvent] = useJoinEventMutation();
 
@@ -48,13 +53,26 @@ const EventCard = ({ event }: Props) => {
         title={event.title}
         className="shadow-md rounded-xl border border-gray-200"
         extra={
-          <Button
-            type="primary"
-            shape="round"
-            onClick={() => joinEventHandler(event._id)}
+          <Tooltip
+            title={
+              event.joinedUsers.includes(userEmail as string)
+                ? "You have already joined this event"
+                : ""
+            }
           >
-            Join Event
-          </Button>
+            <span>
+              {" "}
+              {/* Needed for Tooltip to work with disabled buttons */}
+              <Button
+                type="primary"
+                shape="round"
+                onClick={() => joinEventHandler(event._id)}
+                disabled={event.joinedUsers.includes(userEmail as string)}
+              >
+                Join Event
+              </Button>
+            </span>
+          </Tooltip>
         }
       >
         <p className="text-gray-600 mb-2">
