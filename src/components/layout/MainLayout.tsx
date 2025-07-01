@@ -200,7 +200,7 @@ const App: React.FC = () => {
           Designed & Built by <strong>Md Rahatul Islam</strong>
         </div>
         <div style={{ marginTop: 4 }}>
-          © {new Date().getFullYear()} Md Rahatul Islam. All rights reserved.
+          © {new Date().getFullYear()} Vibevent. All rights reserved.
         </div>
         <a
           href="https://github.com/Th3At0nic"
