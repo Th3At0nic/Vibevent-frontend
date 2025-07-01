@@ -20,7 +20,6 @@ const Events = () => {
 
   const { data: eventsData, isLoading } = useGetAllEventsQuery(queryParams);
 
-
   const events = eventsData?.data as TEvent[]; // safe cast
 
   return (

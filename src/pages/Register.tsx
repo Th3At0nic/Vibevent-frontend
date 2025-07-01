@@ -16,7 +16,9 @@ const Register = () => {
   const [register] = useRegisterMutation();
 
   const onSubmit = async (data: FieldValues) => {
-    const toastId = toast.loading("Creating an account...");
+    const toastId = toast.loading("Creating an account...", {
+      position: "top-center",
+    });
     try {
       const userInfo = {
         name: data.name,
@@ -34,10 +36,16 @@ const Register = () => {
         toast.success(res.message || "Registration Success", {
           id: toastId,
           duration: 2000,
+          position: "top-center",
         });
 
-        navigate(`/login`);
-        toast.message("Now Login to you account", { duration: 4000 });
+        setTimeout(() => {
+          navigate(`/login`);
+          toast.message("Now Login to you account", {
+            duration: 4000,
+            position: "top-center",
+          });
+        }, 2200);
       } else toast.error("Registration Failed");
     } catch (err) {
       toast.error(`Something went wrong, try again`, {

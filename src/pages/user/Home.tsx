@@ -188,15 +188,15 @@ const Home = () => {
               placeholder="Enter your email"
               enterButton="Subscribe"
               size="large"
-              onSearch={(value) =>
+              onSearch={(value) => {
                 toast.success(
-                  `${value} Successfully subscribed to the newsletter!`,
+                  `${value} Successfully subscribed to the Newsletter!`,
                   {
                     position: "top-center",
-                    duration: 5000,
+                    duration: 7000,
                   }
-                )
-              }
+                );
+              }}
             />
           </Col>
         </Row>

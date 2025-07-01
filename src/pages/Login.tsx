@@ -19,7 +19,7 @@ const Login = () => {
   const [login] = useLoginMutation();
 
   const onSubmit = async (formData: FieldValues) => {
-    const toastId = toast.loading("Logging in...");
+    const toastId = toast.loading("Logging in...", { position: "top-center" });
 
     const userInfo = {
       email: formData.email,
@@ -43,13 +43,15 @@ const Login = () => {
       toast.success("Logged in successfully", {
         id: toastId,
         duration: 2000,
+        position: "top-center",
       });
 
-      navigate(`/home`);
+      navigate(`/`);
     } else {
       toast.error(res?.error?.data.message || "Wrong Credentials", {
         id: toastId,
         duration: 5000,
+        position: "top-center",
       });
     }
   };
