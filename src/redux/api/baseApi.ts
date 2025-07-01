@@ -11,6 +11,7 @@ import { toast } from "sonner";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:5000/api",
+  // baseUrl: "https://vibevent-backend-event-management.vercel.app/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
@@ -42,6 +43,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     // Request a new token
     const refreshResult = await fetch(
       "http://localhost:5000/api/auth/refresh-token",
+      // "https://vibevent-backend-event-management.vercel.app/api/auth/refresh-token",
       {
         method: "POST",
         credentials: "include",

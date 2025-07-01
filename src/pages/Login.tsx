@@ -25,7 +25,6 @@ const Login = () => {
       email: formData.email,
       password: formData.password,
     };
-    console.log("res before: ");
     const res = (await login(userInfo)) as TResponse<TLoginResponse>;
 
     if (res?.data?.success) {
@@ -46,9 +45,8 @@ const Login = () => {
         duration: 2000,
       });
 
-      navigate(`/`);
+      navigate(`/home`);
     } else {
-      console.log("res login: ", res);
       toast.error(res?.error?.data.message || "Wrong Credentials", {
         id: toastId,
         duration: 5000,
@@ -91,7 +89,7 @@ const Login = () => {
         <PHForm onSubmit={onSubmit}>
           {/* ID Field */}
           <div style={{ marginBottom: "16px" }}>
-            <PHInput type="text" name="email" label="Email" />
+            <PHInput type="text" name="email" label="Email" required />
           </div>
 
           {/* Password Field */}
@@ -100,6 +98,7 @@ const Login = () => {
               type={showPassword ? "text" : "password"}
               name="password"
               label="Password"
+              required
             />
             {/* Show Password Button */}
             <Button

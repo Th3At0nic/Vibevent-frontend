@@ -9,7 +9,7 @@ import MyEvents from "../pages/user/MyEvents";
 export const userPaths = [
   {
     name: "Home",
-    path: "/",
+    path: "/home",
     element: <Home />,
   },
   {

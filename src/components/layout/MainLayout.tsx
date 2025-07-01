@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Layout, Menu, theme, Drawer, Button, MenuProps, Dropdown } from "antd";
 import { MenuOutlined, CloseOutlined, GithubOutlined } from "@ant-design/icons";
 import myLogo from "../../assets/vibeventLogo.png";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { userPaths } from "../../routes/userRoutes";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
@@ -14,8 +14,8 @@ const { Header, Content, Footer } = Layout;
 
 const App: React.FC = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
-  // const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const dispatch = useAppDispatch();
   const userData = useAppSelector(currentUserData);
@@ -97,6 +97,7 @@ const App: React.FC = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex flex-1 justify-end">
           <Menu
+            selectedKeys={[location.pathname]} // ✅ Sync with current route
             theme="dark"
             mode="horizontal"
             items={navbarItems}
