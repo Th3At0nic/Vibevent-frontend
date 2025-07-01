@@ -1,7 +1,8 @@
 import { Input, DatePicker, Select, Button, Tooltip } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
-import moment from "moment";
+import dayjs, { Dayjs } from "dayjs";
+
 import { useDebounce } from "../hooks/useDebounce";
 
 const { Option } = Select;
@@ -20,7 +21,7 @@ const EventFilterBar = ({ onFilterChange }: TProps) => {
   const [rawTitle, setRawTitle] = useState<string>(""); //  for typing
 
   const [filters, setFilters] = useState<TEventFilters>({
-    date: moment().format("YYYY-MM-DD"), // default to today
+    date: dayjs().format("YYYY-MM-DD"), // default to today
   });
 
   const debouncedTitle = useDebounce(rawTitle, 500); //  600ms delay
@@ -45,6 +46,12 @@ const EventFilterBar = ({ onFilterChange }: TProps) => {
     setFilters({});
   };
 
+  const disabledDate = (current: Dayjs) => {
+    const today = dayjs().startOf("day");
+    const maxDate = dayjs().add(5, "year").endOf("day");
+
+    return current.isBefore(today) || current.isAfter(maxDate);
+  };
   return (
     <div className="w-full mb-6">
       <div className="flex flex-col lg:flex-row gap-3 items-center justify-between">
@@ -60,17 +67,19 @@ const EventFilterBar = ({ onFilterChange }: TProps) => {
 
         {/* Date Picker (Today filter) */}
         <DatePicker
+          showNow
           size="large"
           className="w-full lg:w-1/4"
-          defaultValue={moment()}
+          defaultValue={dayjs()}
+          disabledDate={disabledDate}
           onChange={(date) => {
-            const value = date ? moment(date).format("YYYY-MM-DD") : undefined;
+            const value = date ? date.format("YYYY-MM-DD") : undefined;
             setFilters({
               title: undefined,
               date: value,
               range: undefined,
             });
-            setRawTitle(""); // reset raw title if date used
+            setRawTitle("");
           }}
         />
 
