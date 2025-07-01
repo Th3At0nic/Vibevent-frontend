@@ -4,6 +4,8 @@ VibeEvent is a modern, full-featured Event Management Web Application frontend b
 
 ---
 
+🌐 **Live Site:** [VibeEvent Frontend](https://vibevent-frontend-event-management.vercel.app/)
+
 ## 🚀 Features Overview
 
 ### ✅ General Features
