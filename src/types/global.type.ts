@@ -31,3 +31,18 @@ export type TQueryParam = {
   name: string;
   value: boolean | React.Key;
 };
+
+
+export type TLoginResponse = {
+  success: boolean;
+  message: string;
+  data: {
+    userData: {
+      name: string;
+      email: string;
+      role: 'user' | 'admin'; // assuming these are the only roles
+      photoURL: string;
+    };
+    accessToken: string;
+  };
+};

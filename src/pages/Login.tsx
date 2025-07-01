@@ -10,6 +10,7 @@ import PHForm from "../components/form/PHForm";
 import PHInput from "../components/form/PHInput";
 import { useState } from "react";
 import { verifyToken } from "../utils/verifyToken";
+import { TLoginResponse, TResponse } from "../types";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,30 +21,38 @@ const Login = () => {
 
   const onSubmit = async (formData: FieldValues) => {
     const toastId = toast.loading("Logging in...");
-    try {
-      const userInfo = {
-        email: formData.email,
-        password: formData.password,
-      };
-      const res = await login(userInfo).unwrap();
 
-      const user = verifyToken(res.data.accessToken) as TUserFromToken;
+    const userInfo = {
+      email: formData.email,
+      password: formData.password,
+    };
+    console.log("res before: ");
+    const res = (await login(userInfo)) as TResponse<TLoginResponse>;
+
+    if (res.success) {
+      const user = verifyToken(
+        res?.data?.data.accessToken as string
+      ) as TUserFromToken;
 
       dispatch(
         setUser({
           user: user,
-          token: res.data.accessToken,
-          userData: res.data.userData,
+          token: res?.data?.data.accessToken,
+          userData: res?.data?.data.userData,
         })
       );
 
-      toast.success("Logged in successfully", { id: toastId, duration: 2000 });
-
-      navigate(`/`);
-    } catch (err) {
-      toast.error(`Something went wrong`, {
+      toast.success("Logged in successfully", {
         id: toastId,
         duration: 2000,
+      });
+
+      navigate(`/`);
+    } else {
+      console.log("res login: ", res);
+      toast.error(res?.error?.data.message || "Wrong Credentials", {
+        id: toastId,
+        duration: 5000,
       });
     }
   };
