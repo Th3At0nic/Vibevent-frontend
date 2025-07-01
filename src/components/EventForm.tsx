@@ -4,9 +4,10 @@ import { SubmitHandler, FieldValues } from "react-hook-form";
 import PHForm from "./form/PHForm";
 import PHInput from "./form/PHInput";
 import PHDatePicker from "./form/PHDatePicker";
+import { TEvent } from "../types/event.type";
 
 type TEventFormProps = {
-  defaultValues?: Record<string, any>;
+  defaultValues?: TEvent;
   isUpdateMode?: boolean;
   onSubmit: SubmitHandler<FieldValues>;
 };
