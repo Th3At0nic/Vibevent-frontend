@@ -1,5 +1,6 @@
 import { ProtectedRoute } from "../components/layout/ProtectedRoute";
 import Login from "../pages/Login";
+import Register from "../pages/Register";
 import AddEvent from "../pages/user/AddEvent";
 import Events from "../pages/user/Events";
 import Home from "../pages/user/Home";
@@ -42,5 +43,10 @@ export const userPaths = [
     name: "Sign In",
     path: "login",
     element: <Login />,
+  },
+  {
+    // name: "Sign In",
+    path: "register",
+    element: <Register />,
   },
 ];

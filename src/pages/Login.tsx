@@ -29,8 +29,6 @@ const Login = () => {
 
       const user = verifyToken(res.data.accessToken) as TUserFromToken;
 
-      console.log("user verify:  ", user);
-
       dispatch(
         setUser({
           user: user,
@@ -127,6 +125,15 @@ const Login = () => {
           >
             Login
           </Button>
+          <p className="text-center mt-2">
+            Don't have an account?{" "}
+            <span
+              className="text-blue-500 hover:cursor-pointer"
+              onClick={() => navigate("/register")}
+            >
+              Register
+            </span>
+          </p>
         </PHForm>
       </div>
     </Row>

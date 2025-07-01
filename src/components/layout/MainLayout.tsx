@@ -19,7 +19,6 @@ const App: React.FC = () => {
 
   const dispatch = useAppDispatch();
   const userData = useAppSelector(currentUserData);
-  console.log("userdata: ", userData);
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -61,7 +60,7 @@ const App: React.FC = () => {
           onClick={() => {
             handleNavClick(item.path);
           }}
-          className="cursor-pointer"
+          className="cursor-pointer font-semibold text-white"
         >
           {item.name}
         </span>
