@@ -10,15 +10,7 @@ export const router = createBrowserRouter([
     children: routesGenerator(userPaths),
   },
   // {
-  //   path: "/login",
-  //   element: <Login />,
-  // },
-  // {
   //   path: "/auth/change-password",
   //   element: <ChangePassword />,
-  // },
-  // {
-  //   path: "/register",
-  //   element: <Register />,
   // },
 ]);

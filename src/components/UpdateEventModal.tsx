@@ -1,4 +1,3 @@
-// components/event/UpdateEventModal.tsx
 import { Modal } from "antd";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import EventForm from "./EventForm";

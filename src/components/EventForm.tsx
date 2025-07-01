@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Col, Divider, Row } from "antd";
 import { SubmitHandler, FieldValues } from "react-hook-form";
 import PHForm from "./form/PHForm";
