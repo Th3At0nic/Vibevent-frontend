@@ -52,7 +52,7 @@ VibeEvent is a modern, full-featured Event Management Web Application frontend b
 - "Join Event" Button:
   - Disabled if already joined
   - Shows tooltip "Already joined" on hover
-- **Search & Filter System (In Progress):**
+- **Search & Filter System:**
   - Filter by:
     - Today
     - This Week
@@ -100,7 +100,7 @@ VibeEvent is a modern, full-featured Event Management Web Application frontend b
   - Photo URL
 - Clear and descriptive error handling
 - After login:
-  - Redirects to Home (or will redirect to originally intended private route in future)
+  - Redirects to Home (or will redirect to originally intended private route)
 
 ---
 
@@ -122,13 +122,44 @@ VibeEvent is a modern, full-featured Event Management Web Application frontend b
 
 ## ✅ Project Status
 
-🔧 **Still in progress.**  
-✅ Core features completed: authentication, event display, join, add, update modal, delete  
-🚧 Pending / Incomplete:
+## 🚀 Project Status & Future Plans
 
-- Search & Filter system
-- Homepage design
-- Minor UI polish and accessibility improvements
+✅ Core features are implemented and functional, including custom authentication, event creation, joining, updating, and deletion.
+
+🛠️ This project is actively being improved and will be gradually enhanced to meet **industry-level standards**.
+
+### 🔮 Planned Enhancements
+
+- 🔍 **Advanced Search & Filtering**  
+  Add support for filtering by keyword, location, and organizer name with real-time updates.
+
+- 🧠 **Smart Sorting & Pagination**  
+  Implement customizable sorting (e.g., by date, popularity) and efficient pagination for scalability.
+
+- 🗓️ **Event Reminders & RSVP System**  
+  Allow users to set event reminders and RSVP to events, improving user engagement.
+
+- 📬 **Email Notifications**  
+  Send confirmation emails for event registration, cancellations, or updates.
+
+- 🧾 **Event Categories & Tags**  
+  Enable category-based event browsing (e.g., Tech, Religious, Cultural) for better discoverability.
+
+- 💬 **Comments & Feedback**  
+  Allow attendees to leave feedback or questions on event pages.
+
+- 👥 **User Profiles & Dashboard**  
+  Add a profile page with user activity history, upcoming events, and edit options.
+
+- 📈 **Admin Panel**  
+  Add role-based access with admin features like user management, event moderation, and analytics.
+
+- 🌍 **Responsive & PWA Support**  
+  Make the app installable as a Progressive Web App (PWA) with full offline capabilities.
+
+---
+
+📌 **Goal:** To evolve this into a **production-ready, scalable, and feature-rich event management system** that showcases clean code architecture, real-world UX practices, and robust front-end engineering.
 
 ---
 
