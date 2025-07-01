@@ -1,7 +1,31 @@
+// pages/Events/index.tsx or wherever you have it
+import { useGetAllEventsQuery } from "../../redux/features/event/eventManagement.api";
+import EventCard from "../../components/EventCard";
+import { Spin } from "antd";
+import { TEvent } from "../../types/event.type";
+
 const Events = () => {
+  const { data: eventsData, isLoading } = useGetAllEventsQuery(undefined);
+
+  const events = eventsData?.data as TEvent[]; // safe cast
+
   return (
-    <div>
-      <h1>This is Events Page</h1>
+    <div className="p-4 md:p-10 min-h-screen bg-gradient-to-b from-white to-gray-100">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+        All Events
+      </h1>
+
+      {isLoading ? (
+        <div className="flex justify-center items-center h-40">
+          <Spin size="large" />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {events?.map((event) => (
+            <EventCard key={event._id} event={event} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

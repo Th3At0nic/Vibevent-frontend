@@ -9,7 +9,7 @@ import { TError } from "../types";
 import { useState } from "react";
 import { useAppDispatch } from "../redux/hooks";
 import { logoutUser } from "../redux/features/auth/authSlice";
-import { useChangePasswordMutation } from "../redux/features/user/userManagement.api";
+import { useChangePasswordMutation } from "../redux/features/auth/authApi";
 
 const ChangePassword = () => {
   const dispatch = useAppDispatch();

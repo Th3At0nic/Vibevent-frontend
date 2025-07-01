@@ -1,6 +1,6 @@
 import { baseApi } from "../../api/baseApi";
 
-const userManagementApi = baseApi.injectEndpoints({
+const eventManagementApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // getAllStudents: builder.query({
     //   query: (args) => {
@@ -55,14 +55,13 @@ const userManagementApi = baseApi.injectEndpoints({
     //   }),
     //   invalidatesTags: ["students"],
     // }),
-    changePassword: builder.mutation({
-      query: (data) => ({
-        url: `/auth/change-password`,
-        method: "POST",
-        body: data,
+    getAllEvents: builder.query({
+      query: () => ({
+        url: `/events`,
+        method: "GET",
       }),
     }),
   }),
 });
 
-export const { useChangePasswordMutation } = userManagementApi;
+export const { useGetAllEventsQuery } = eventManagementApi;
