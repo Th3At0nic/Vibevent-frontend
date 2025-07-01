@@ -2,9 +2,19 @@ import { useGetAllEventsQuery } from "../../redux/features/event/eventManagement
 import EventCard from "../../components/EventCard";
 import { Spin } from "antd";
 import { TEvent } from "../../types/event.type";
+import { useState } from "react";
+import EventFilterBar, { TEventFilters } from "../../components/EventFilterBar";
 
 const Events = () => {
-  const { data: eventsData, isLoading } = useGetAllEventsQuery(undefined);
+  const [filters, setFilters] = useState<TEventFilters>({});
+
+  const queryParams = {
+    title: filters.title,
+    date: filters.date,
+    range: filters.range,
+  };
+
+  const { data: eventsData, isLoading } = useGetAllEventsQuery(queryParams);
 
   const events = eventsData?.data as TEvent[]; // safe cast
 
@@ -13,6 +23,10 @@ const Events = () => {
       <h1 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-transparent bg-clip-text">
         All Events
       </h1>
+
+      <div className="lg:mx-70 lg:my-10">
+        <EventFilterBar onFilterChange={setFilters} />
+      </div>
 
       {isLoading ? (
         <div className="flex justify-center items-center h-40">
