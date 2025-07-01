@@ -119,6 +119,14 @@ const eventManagementApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["allEvents", "myEvents"],
     }),
+    addEvent: builder.mutation({
+      query: (data: TEvent) => ({
+        url: `/events/add-event`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["allEvents", "myEvents"],
+    }),
   }),
 });
 
@@ -128,4 +136,5 @@ export const {
   useGetMyEventsQuery,
   useDeleteEventMutation,
   useUpdateEventMutation,
+  useAddEventMutation,
 } = eventManagementApi;

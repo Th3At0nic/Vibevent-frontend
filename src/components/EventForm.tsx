@@ -33,7 +33,7 @@ const EventForm = ({
           />
         </Col>
         <Col span={24} lg={8} md={12}>
-          <PHDatePicker name="dateTime" label="Date & Time" />
+          <PHDatePicker name="dateTime" label="Date & Time" required />
         </Col>
         <Col span={24} lg={8} md={12}>
           <PHInput type="text" name="location" label="Location" required />
@@ -59,6 +59,7 @@ const EventForm = ({
             type="number"
             name="attendeeCount"
             label="Attendee Count"
+            defaultValue={0}
             required
           />
         </Col>

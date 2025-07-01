@@ -5,9 +5,10 @@ import dayjs from "dayjs";
 type TPHDatePickerProps = {
   name: string;
   label?: string;
+  required?: boolean;
 };
 
-const PHDatePicker = ({ name, label }: TPHDatePickerProps) => {
+const PHDatePicker = ({ name, label, required }: TPHDatePickerProps) => {
   return (
     <div style={{ marginBottom: "15px" }}>
       <Controller
@@ -15,6 +16,7 @@ const PHDatePicker = ({ name, label }: TPHDatePickerProps) => {
         render={({ field, fieldState: { error } }) => (
           <Form.Item label={label}>
             <DatePicker
+              required={required}
               id={name}
               size="large"
               style={{ width: "100%" }}

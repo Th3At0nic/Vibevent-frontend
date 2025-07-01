@@ -1,11 +1,34 @@
 import { Row, Col } from "antd";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import EventForm from "../../components/EventForm";
+import { TEvent } from "../../types/event.type";
+import { useAddEventMutation } from "../../redux/features/event/eventManagement.api";
+import { toast } from "sonner";
+import { TError } from "../../types";
 
 const AddEvent = () => {
-  const handleAddSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log("Add Event Submitted:", data);
-    // mutation here later
+  const [addEvent] = useAddEventMutation();
+
+  const handleAddSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Adding Event...");
+    const eventData = {
+      ...data,
+      attendeeCount: Number(data.attendeeCount.toString()),
+    };
+    console.log("Add Event Submitted:", eventData);
+
+    const res = await addEvent(eventData as TEvent);
+
+    console.log("res update: ", res);
+
+    if (res?.data?.success) {
+      toast.success(res.data.message, { id: toastId, duration: 3000 });
+    } else if (res?.error) {
+      toast.error((res?.error as TError)?.data.message, {
+        id: toastId,
+        duration: 7000,
+      });
+    }
   };
 
   return (
