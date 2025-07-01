@@ -1,4 +1,3 @@
-// pages/Events/index.tsx or wherever you have it
 import { useGetAllEventsQuery } from "../../redux/features/event/eventManagement.api";
 import EventCard from "../../components/EventCard";
 import { Spin } from "antd";

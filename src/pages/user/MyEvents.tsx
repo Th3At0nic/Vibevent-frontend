@@ -1,4 +1,3 @@
-// pages/MyEvents/index.tsx
 import {
   useDeleteEventMutation,
   useGetMyEventsQuery,
@@ -9,9 +8,14 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { TEvent } from "../../types/event.type";
 import { toast } from "sonner";
 import { TError } from "../../types";
+import { useState } from "react";
+import UpdateEventModal from "../../components/UpdateEventModal";
 
 const MyEvents = () => {
   const { data: myEventsData, isLoading } = useGetMyEventsQuery(undefined);
+
+  const [selectedEvent, setSelectedEvent] = useState<TEvent | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // const [updateEvent] = useUpdateEventMutation();
   const [deleteEvent] = useDeleteEventMutation();
@@ -20,6 +24,11 @@ const MyEvents = () => {
 
   const handleUpdate = (eventId: string) => {
     console.log("Update event:", eventId);
+    const eventToUpdate = events?.find((e) => e._id === eventId);
+    if (eventToUpdate) {
+      setSelectedEvent(eventToUpdate);
+      setIsModalOpen(true);
+    }
     // Show modal or navigate to update page
   };
 
@@ -78,6 +87,13 @@ const MyEvents = () => {
             />
           ))}
         </div>
+      )}
+      {selectedEvent && (
+        <UpdateEventModal
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          event={selectedEvent}
+        />
       )}
     </div>
   );
