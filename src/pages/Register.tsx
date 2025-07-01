@@ -30,17 +30,15 @@ const Register = () => {
 
       const res = await register(formData).unwrap();
 
-      console.log("res: ", res);
-
       if (res.success) {
         toast.success(res.message || "Registration Success", {
           id: toastId,
-          duration: 4000,
+          duration: 2000,
         });
-      } else toast.error("Registration Failed");
 
-      navigate(`/login`);
-      toast.message("Now Login to you account", { duration: 4000 });
+        navigate(`/login`);
+        toast.message("Now Login to you account", { duration: 4000 });
+      } else toast.error("Registration Failed");
     } catch (err) {
       toast.error(`Something went wrong, try again`, {
         id: toastId,

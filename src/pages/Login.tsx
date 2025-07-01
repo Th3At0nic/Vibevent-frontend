@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button, Row, Typography } from "antd";
 import { FieldValues } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
@@ -29,7 +28,7 @@ const Login = () => {
     console.log("res before: ");
     const res = (await login(userInfo)) as TResponse<TLoginResponse>;
 
-    if (res.success) {
+    if (res?.data?.success) {
       const user = verifyToken(
         res?.data?.data.accessToken as string
       ) as TUserFromToken;
