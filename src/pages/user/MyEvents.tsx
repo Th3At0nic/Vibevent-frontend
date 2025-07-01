@@ -10,9 +10,22 @@ import { toast } from "sonner";
 import { TError } from "../../types";
 import { useState } from "react";
 import UpdateEventModal from "../../components/UpdateEventModal";
+import EventFilterBar, { TEventFilters } from "../../components/EventFilterBar";
 
 const MyEvents = () => {
-  const { data: myEventsData, isLoading } = useGetMyEventsQuery(undefined);
+  const [filters, setFilters] = useState<TEventFilters>({});
+
+  const handleFilterChange = (updatedFilters: TEventFilters) => {
+    setFilters(updatedFilters);
+  };
+
+  const queryParams = {
+    title: filters.title,
+    date: filters.date,
+    range: filters.range,
+  };
+
+  const { data: myEventsData, isLoading } = useGetMyEventsQuery(queryParams);
 
   const [selectedEvent, setSelectedEvent] = useState<TEvent | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -52,6 +65,10 @@ const MyEvents = () => {
       <h1 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-transparent bg-clip-text">
         My Events
       </h1>
+
+      <div className="lg:mx-70 lg:my-10">
+        <EventFilterBar onFilterChange={handleFilterChange} />
+      </div>
 
       {isLoading ? (
         <div className="flex justify-center items-center h-40">
