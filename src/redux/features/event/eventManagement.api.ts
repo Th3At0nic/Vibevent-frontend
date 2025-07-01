@@ -61,7 +61,15 @@ const eventManagementApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    joinEvent: builder.mutation({
+      query: (eventId: string) => ({
+        url: `/events/${eventId}/join`,
+        method: "PATCH",
+        body: {},
+      }),
+    }),
   }),
 });
 
-export const { useGetAllEventsQuery } = eventManagementApi;
+export const { useGetAllEventsQuery, useJoinEventMutation } =
+  eventManagementApi;

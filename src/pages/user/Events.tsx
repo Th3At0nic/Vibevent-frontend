@@ -11,7 +11,7 @@ const Events = () => {
 
   return (
     <div className="p-4 md:p-10 min-h-screen bg-gradient-to-b from-white to-gray-100">
-      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+      <h1 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-transparent bg-clip-text">
         All Events
       </h1>
 

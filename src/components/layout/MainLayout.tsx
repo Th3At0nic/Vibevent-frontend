@@ -60,7 +60,7 @@ const App: React.FC = () => {
           onClick={() => {
             handleNavClick(item.path);
           }}
-          className="cursor-pointer font-semibold text-white"
+          className="cursor-pointer font-semibold lg:text-white text-black"
         >
           {item.name}
         </span>
@@ -164,6 +164,17 @@ const App: React.FC = () => {
         className="md:hidden"
       >
         <Menu mode="vertical" items={navbarItems} />
+        {userData && (
+          <div className="flex items-center gap-5 mt-5">
+            <img
+              src={userData.photoURL}
+              alt="Profile"
+              className="w-10 h-10 rounded-full  border"
+            />
+            <span className="font-semibold text-black">{userData.name}</span>
+            <Button onClick={handleLogout}>Logout</Button>,
+          </div>
+        )}
       </Drawer>
       {/* Main Content */}
       <Content

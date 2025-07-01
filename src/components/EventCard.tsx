@@ -7,13 +7,37 @@ import {
 } from "@ant-design/icons";
 import { motion } from "framer-motion";
 import moment from "moment";
-import { TEvent } from "../types/event.type";
+import {
+  TEvent,
+  TJoinedError,
+  TJoinedEventResponse,
+} from "../types/event.type";
+import { useJoinEventMutation } from "../redux/features/event/eventManagement.api";
+import { toast } from "sonner";
 
 type Props = {
   event: TEvent;
 };
 
 const EventCard = ({ event }: Props) => {
+
+  const [joinEvent] = useJoinEventMutation();
+
+  const joinEventHandler = async (eventId: string) => {
+    const toastId = toast.loading("Joining...");
+
+    const res = await joinEvent(eventId);
+
+    if ((res?.data as TJoinedEventResponse)?.success) {
+      toast.success(res.data.message, { id: toastId, duration: 2000 });
+    } else if (res?.error) {
+      toast.error((res.error as TJoinedError)?.data.message, {
+        id: toastId,
+        duration: 2000,
+      });
+    }
+  };
+
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
@@ -24,7 +48,11 @@ const EventCard = ({ event }: Props) => {
         title={event.title}
         className="shadow-md rounded-xl border border-gray-200"
         extra={
-          <Button type="primary" shape="round">
+          <Button
+            type="primary"
+            shape="round"
+            onClick={() => joinEventHandler(event._id)}
+          >
             Join Event
           </Button>
         }
