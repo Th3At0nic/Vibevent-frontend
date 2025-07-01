@@ -1,3 +1,4 @@
+import { TEvent } from "../../../types/event.type";
 import { baseApi } from "../../api/baseApi";
 
 const eventManagementApi = baseApi.injectEndpoints({
@@ -60,6 +61,14 @@ const eventManagementApi = baseApi.injectEndpoints({
         url: `/events`,
         method: "GET",
       }),
+      providesTags: ["allEvents"],
+    }),
+    getMyEvents: builder.query({
+      query: () => ({
+        url: `/events/my-events`,
+        method: "GET",
+      }),
+      providesTags: ["myEvents"],
     }),
     joinEvent: builder.mutation({
       query: (eventId: string) => ({
@@ -67,9 +76,31 @@ const eventManagementApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: {},
       }),
+      invalidatesTags: ["allEvents", "myEvents"],
+    }),
+    deleteEvent: builder.mutation({
+      query: (eventId: string) => ({
+        url: `/events/${eventId}`,
+        method: "DELETE",
+        body: {},
+      }),
+      invalidatesTags: ["allEvents", "myEvents"],
+    }),
+    updateEvent: builder.mutation({
+      query: (data: TEvent) => ({
+        url: `/events/${data._id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["allEvents", "myEvents"],
     }),
   }),
 });
 
-export const { useGetAllEventsQuery, useJoinEventMutation } =
-  eventManagementApi;
+export const {
+  useGetAllEventsQuery,
+  useJoinEventMutation,
+  useGetMyEventsQuery,
+  useDeleteEventMutation,
+  useUpdateEventMutation,
+} = eventManagementApi;
