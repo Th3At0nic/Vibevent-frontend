@@ -13,20 +13,17 @@ const AddEvent = () => {
     const toastId = toast.loading("Adding Event...");
     const eventData = {
       ...data,
-      attendeeCount: Number(data.attendeeCount.toString()),
+      attendeeCount: Number(data.attendeeCount),
     };
-    console.log("Add Event Submitted:", eventData);
 
     const res = await addEvent(eventData as TEvent);
-
-    console.log("res update: ", res);
 
     if (res?.data?.success) {
       toast.success(res.data.message, { id: toastId, duration: 3000 });
     } else if (res?.error) {
       toast.error((res?.error as TError)?.data.message, {
         id: toastId,
-        duration: 7000,
+        duration: 8000,
       });
     }
   };

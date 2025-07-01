@@ -35,7 +35,6 @@ const MyEvents = () => {
   const [deleteEvent] = useDeleteEventMutation();
 
   const handleUpdate = (eventId: string) => {
-    console.log("Update event:", eventId);
     const eventToUpdate = events?.find((e) => e._id === eventId);
     if (eventToUpdate) {
       setSelectedEvent(eventToUpdate);
