@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { Button, Card, Col, Input, Row, Spin, Tooltip } from "antd";
 import { motion } from "framer-motion";
-import { useGetAllEventsQuery } from "../../redux/features/event/eventManagement.api";
-import EventCard from "../../components/EventCard";
-import { TEvent } from "../../types/event.type";
+import { useGetAllEventsQuery } from "../redux/features/event/eventManagement.api";
+import EventCard from "../components/EventCard";
+import { TEvent } from "../types/event.type";
 import dayjs from "dayjs";
 import { toast } from "sonner";
+import DemoEventPreview from "../components/DemoEventPreview";
 
 const Home = () => {
   const today = dayjs().format("YYYY-MM-DD");
@@ -45,6 +46,17 @@ const Home = () => {
           </Link>
         </div>
       </section>
+
+      {/* Demo Events before login*/}
+      {!recentEvents && (
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <DemoEventPreview />
+        </motion.div>
+      )}
 
       {/* Today’s Events */}
       {isLoading ? (

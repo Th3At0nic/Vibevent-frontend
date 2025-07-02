@@ -3,7 +3,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddEvent from "../pages/user/AddEvent";
 import Events from "../pages/user/Events";
-import Home from "../pages/user/Home";
+import Home from "../pages/Home";
 import MyEvents from "../pages/user/MyEvents";
 
 export const userPaths = [
