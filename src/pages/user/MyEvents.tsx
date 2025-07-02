@@ -11,6 +11,7 @@ import { TError } from "../../types";
 import { useState } from "react";
 import UpdateEventModal from "../../components/UpdateEventModal";
 import EventFilterBar, { TEventFilters } from "../../components/EventFilterBar";
+import { NoDataCard } from "../../utils/NoDataCard";
 
 const MyEvents = () => {
   const [filters, setFilters] = useState<TEventFilters>({});
@@ -58,6 +59,22 @@ const MyEvents = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-40">
+        <Spin size="large" />
+      </div>
+    );
+  }
+
+  if (!events || myEventsData.length === 0)
+    return (
+      <NoDataCard
+        title="No Events Available"
+        description="You haven't created any events yet. Start by adding your first one."
+      />
+    );
+
   return (
     <div className="p-4 md:p-10 min-h-screen bg-gradient-to-b from-white to-gray-100">
       <Divider>
@@ -70,41 +87,35 @@ const MyEvents = () => {
         <EventFilterBar onFilterChange={handleFilterChange} />
       </div>
 
-      {isLoading ? (
-        <div className="flex justify-center items-center h-40">
-          <Spin size="large" />
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {events?.map((event) => (
-            <EventCard
-              key={event._id}
-              event={event}
-              footerButtons={
-                <>
-                  <Button
-                    icon={<EditOutlined />}
-                    type="default"
-                    onClick={() => handleUpdate(event._id)}
-                  >
-                    Update
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {events?.map((event) => (
+          <EventCard
+            key={event._id}
+            event={event}
+            footerButtons={
+              <>
+                <Button
+                  icon={<EditOutlined />}
+                  type="default"
+                  onClick={() => handleUpdate(event._id)}
+                >
+                  Update
+                </Button>
+                <Popconfirm
+                  title="Are you sure you want to delete this event?"
+                  onConfirm={() => handleDelete(event._id)}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <Button icon={<DeleteOutlined />} type="primary" danger>
+                    Delete
                   </Button>
-                  <Popconfirm
-                    title="Are you sure you want to delete this event?"
-                    onConfirm={() => handleDelete(event._id)}
-                    okText="Yes"
-                    cancelText="No"
-                  >
-                    <Button icon={<DeleteOutlined />} type="primary" danger>
-                      Delete
-                    </Button>
-                  </Popconfirm>
-                </>
-              }
-            />
-          ))}
-        </div>
-      )}
+                </Popconfirm>
+              </>
+            }
+          />
+        ))}
+      </div>
       {selectedEvent && (
         <UpdateEventModal
           open={isModalOpen}
