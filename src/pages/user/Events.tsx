@@ -1,6 +1,6 @@
 import { useGetAllEventsQuery } from "../../redux/features/event/eventManagement.api";
 import EventCard from "../../components/EventCard";
-import { Spin } from "antd";
+import { Divider, Spin } from "antd";
 import { TEvent } from "../../types/event.type";
 import { useState } from "react";
 import EventFilterBar, { TEventFilters } from "../../components/EventFilterBar";
@@ -24,9 +24,11 @@ const Events = () => {
 
   return (
     <div className="p-4 md:p-10 min-h-screen bg-gradient-to-b from-white to-gray-100">
-      <h1 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-transparent bg-clip-text">
-        All Events
-      </h1>
+      <Divider>
+        <h1 className="text-3xl font-bold text-center bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-transparent bg-clip-text">
+          All Events
+        </h1>
+      </Divider>
 
       <div className="lg:mx-70 lg:my-10">
         <EventFilterBar onFilterChange={handleFilterChange} />

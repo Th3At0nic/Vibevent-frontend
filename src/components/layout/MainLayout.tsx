@@ -25,22 +25,12 @@ const App: React.FC = () => {
     navigate("/");
   };
 
-  const handleNavClick = (sectionId: string) => {
-    navigate(sectionId);
-    // if (location.pathname === "/") {
-    //   // Already on home, just scroll
-    //   const section = document.getElementById(sectionId);
-    //   if (section) {
-    //     section.scrollIntoView({ behavior: "smooth" });
-    //   }
-    // } else {
-    //   // Navigate to home with state
-    //   navigate("/", { state: { scrollTo: sectionId } });
-    // }
+  const handleNavClick = (path: string) => {
+    navigate(path);
 
-    // if (window.innerWidth < 768) {
-    //   setDrawerVisible(false);
-    // }
+    if (window.innerWidth < 768) {
+      setDrawerVisible(false);
+    }
   };
 
   const {
@@ -56,12 +46,7 @@ const App: React.FC = () => {
     .map((item) => ({
       key: item.path,
       label: (
-        <span
-          onClick={() => {
-            handleNavClick(item.path);
-          }}
-          className="cursor-pointer font-semibold lg:text-white text-black"
-        >
+        <span className="cursor-pointer font-semibold lg:text-white text-black">
           {item.name}
         </span>
       ),
@@ -97,10 +82,11 @@ const App: React.FC = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex flex-1 justify-end">
           <Menu
-            selectedKeys={[location.pathname]} // ✅ Sync with current route
+            selectedKeys={[location.pathname]} //
             theme="dark"
             mode="horizontal"
             items={navbarItems}
+            onClick={({ key }) => handleNavClick(key)}
             style={{
               background: "transparent",
               flex: 1,

@@ -39,7 +39,6 @@ const UpdateEventModal = ({ open, onClose, event }: TUpdateEventModalProps) => {
 
   return (
     <Modal
-      title="Update Event"
       open={open}
       onCancel={onClose}
       footer={null}

@@ -3,7 +3,7 @@ import { FieldValues } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useDispatch } from "react-redux";
 import { setUser, TUserFromToken } from "../redux/features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import PHForm from "../components/form/PHForm";
 import PHInput from "../components/form/PHInput";
@@ -15,6 +15,9 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { Title } = Typography;
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const [login] = useLoginMutation();
 
@@ -45,8 +48,7 @@ const Login = () => {
         duration: 2000,
         position: "top-center",
       });
-
-      navigate(`/`);
+      navigate(from, { replace: true });
     } else {
       toast.error(res?.error?.data.message || "Wrong Credentials", {
         id: toastId,

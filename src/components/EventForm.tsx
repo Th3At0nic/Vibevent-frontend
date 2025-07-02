@@ -18,7 +18,12 @@ const EventForm = ({
 }: TEventFormProps) => {
   return (
     <PHForm onSubmit={onSubmit} defaultValues={defaultValues}>
-      <Divider>{isUpdateMode ? "Update Event" : "Create Event"}</Divider>
+      <Divider>
+        <h1 className="text-3xl font-bold text-center bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-transparent bg-clip-text">
+          {isUpdateMode ? "Update Event" : "Create Event"}
+        </h1>
+      </Divider>
+
       <Row gutter={10}>
         <Col span={24} lg={8} md={12}>
           <PHInput type="text" name="title" label="Event Title" required />
