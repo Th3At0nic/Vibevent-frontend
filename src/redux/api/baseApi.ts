@@ -63,8 +63,8 @@ const baseQueryWithRefreshToken: BaseQueryFn<
       // calling the base query again to auto reload the page/query to capture the result after accessing the new access token and authorization, it doesn't visually reloads the page, it update the state internally without reloading the page
       result = await baseQuery(args, api, extraOptions);
     } else {
-      toast.error("Session expired. Please log in again.", { duration: 2000 });
       api.dispatch(logoutUser());
+      toast.error("Session expired. Please log in again.", { duration: 2000 });
     }
   }
 

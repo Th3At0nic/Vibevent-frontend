@@ -7,12 +7,19 @@ import { TEvent } from "../types/event.type";
 import dayjs from "dayjs";
 import { toast } from "sonner";
 import DemoEventPreview from "../components/DemoEventPreview";
+import { useAppSelector } from "../redux/hooks";
+import { currentUser } from "../redux/features/auth/authSlice";
 
 const Home = () => {
+  const user = useAppSelector(currentUser);
+
   const today = dayjs().format("YYYY-MM-DD");
 
-  const { data: eventsData, isLoading } = useGetAllEventsQuery({ date: today });
-  const { data: recentEventsData } = useGetAllEventsQuery({});
+  const { data: eventsData, isLoading } = useGetAllEventsQuery(
+    { date: today },
+    { skip: !user }
+  );
+  const { data: recentEventsData } = useGetAllEventsQuery({}, { skip: !user });
 
   const todaysEvents = eventsData?.data as TEvent[];
   const recentEvents = (recentEventsData?.data as TEvent[])?.slice(0, 6);

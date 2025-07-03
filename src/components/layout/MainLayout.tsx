@@ -22,7 +22,12 @@ const App: React.FC = () => {
 
   const handleLogout = () => {
     dispatch(logoutUser());
-    navigate("/");
+
+    //using settimeout bcz dispatch logout can work perfectly before reloading.because reloading while logging out prevents the logout operation to be successful
+    setTimeout(() => {
+      navigate("/", { replace: true });
+      window.location.reload();
+    }, 1000);
   };
 
   const handleNavClick = (path: string) => {
