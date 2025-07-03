@@ -13,9 +13,9 @@ import {
 const { Header, Content, Footer } = Layout;
 
 const App: React.FC = () => {
+  const location = useLocation();
   const [drawerVisible, setDrawerVisible] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const dispatch = useAppDispatch();
   const userData = useAppSelector(currentUserData);
@@ -87,7 +87,7 @@ const App: React.FC = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex flex-1 justify-end">
           <Menu
-            selectedKeys={[location.pathname]} //
+            selectedKeys={[location.pathname]}
             theme="dark"
             mode="horizontal"
             items={navbarItems}

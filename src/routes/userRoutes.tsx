@@ -14,7 +14,7 @@ export const userPaths = [
   },
   {
     name: "Events",
-    path: "events",
+    path: "/events",
     element: (
       <ProtectedRoute role="user">
         <Events />
@@ -23,7 +23,7 @@ export const userPaths = [
   },
   {
     name: "Add Event",
-    path: "add-event",
+    path: "/add-event",
     element: (
       <ProtectedRoute role="user">
         <AddEvent />
@@ -32,7 +32,7 @@ export const userPaths = [
   },
   {
     name: "My Event",
-    path: "my-events",
+    path: "/my-events",
     element: (
       <ProtectedRoute role="user">
         <MyEvents />
@@ -41,11 +41,10 @@ export const userPaths = [
   },
   {
     name: "Sign In",
-    path: "login",
+    path: "/login",
     element: <Login />,
   },
   {
-    // name: "Sign In",
     path: "register",
     element: <Register />,
   },
